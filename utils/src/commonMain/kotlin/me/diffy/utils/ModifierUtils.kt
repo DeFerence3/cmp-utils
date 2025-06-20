@@ -16,3 +16,5 @@ inline fun Modifier.applyWhen(
 expect inline fun Modifier.onCtrlClick(crossinline onClick: () -> Unit): Modifier
 
 expect inline fun Modifier.onKeyClick(key: Key,crossinline onClick: () -> Unit): Modifier
+
+expect inline fun Modifier.onAnyKeyClick(crossinline onClick: (key: Key) -> Unit): Modifier

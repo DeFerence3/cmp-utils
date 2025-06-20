@@ -43,3 +43,17 @@ actual inline fun Modifier.onKeyClick(key: Key, crossinline onClick: () -> Unit)
     }
     this.then(modifier)
 }
+
+actual inline fun Modifier.onAnyKeyClick(crossinline onClick: (Key) -> Unit): Modifier = composed {
+    val focusRequester = remember { FocusRequester() }
+    val modifier = Modifier.onKeyEvent{
+        onClick(it.key)
+        true
+    }
+        .focusable()
+        .focusRequester(focusRequester)
+    LaunchedEffect(Unit){
+        focusRequester.requestFocus()
+    }
+    this.then(modifier)
+}
