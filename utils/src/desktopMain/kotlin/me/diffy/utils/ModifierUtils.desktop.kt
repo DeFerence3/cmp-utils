@@ -2,15 +2,11 @@
 
 package me.diffy.utils
 
-import androidx.compose.foundation.focusable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.input.pointer.PointerButton
 import androidx.compose.ui.input.pointer.PointerEventType
@@ -40,7 +36,6 @@ actual inline fun Modifier.onKeyClick(key: Key, crossinline onClick: () -> Unit)
 }
 
 actual inline fun Modifier.onAnyKeyClick(crossinline onClick: (Key) -> Unit): Modifier = composed {
-    val focusRequester = remember { FocusRequester() }
     val pressedKeys = remember { mutableStateMapOf<Key, Boolean>() }
     val modifier = Modifier.onKeyEvent { keyEvent: KeyEvent ->
         when (keyEvent.type) {
@@ -57,11 +52,6 @@ actual inline fun Modifier.onAnyKeyClick(crossinline onClick: (Key) -> Unit): Mo
             }
             else -> false
         }
-    }
-        .focusable()
-        .focusRequester(focusRequester)
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
     }
     this.then(modifier)
 }
