@@ -1,5 +1,6 @@
 package me.diffy.cmp.utils
 
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeContentPadding
@@ -8,9 +9,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import me.diffy.utils.onAnyKeyClick
-import me.diffy.utils.onKeyClick
 import me.diffy.utils.toast.ToastDurationType
 import me.diffy.utils.toast.ToastManager
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -21,19 +22,25 @@ fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         val toastManager by remember { mutableStateOf(ToastManager()) }
+        val focusRequester = remember { FocusRequester() }
         Column(
             modifier = Modifier
+                .focusable()
+                .focusRequester(focusRequester)
                 .safeContentPadding()
-                .onKeyClick(Key.A){
+                .onAnyKeyClick{
+                    println("Clicked A")
                     toastManager.showToast("Clicked A", ToastDurationType.SHORT)
                 }
-                .onAnyKeyClick{
-                    toastManager.showToast("Clicked ${it.keyCode}", ToastDurationType.SHORT)
-                }
-                .fillMaxSize(),
+                .fillMaxSize()
+                ,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text("Press A for onKeyClick")
+            Text("Click A [Key Press Detector,Toast]")
+        }
+
+        LaunchedEffect(Unit){
+            focusRequester.requestFocus()
         }
     }
 }
