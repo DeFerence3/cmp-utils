@@ -12,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
 import cmp_utils.composeapp.generated.resources.Res
 import cmp_utils.composeapp.generated.resources.compose_multiplatform
+import me.diffy.utils.onKeyClick
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -25,6 +27,9 @@ fun App() {
         Column(
             modifier = Modifier
                 .safeContentPadding()
+                .onKeyClick(Key.A){
+                    println("Clicked A")
+                }
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
