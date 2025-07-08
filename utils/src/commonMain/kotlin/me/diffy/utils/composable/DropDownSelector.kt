@@ -52,8 +52,7 @@ fun <T> MultiDropDownSelector(
     modifier: Modifier = Modifier,
     expanded: Boolean,
     values: List<T>,
-    onRemove: (T) -> Unit,
-    onAdd: (T) -> Unit,
+    onClickItem: (T) -> Unit,
     onExpandedChange: (Boolean) -> Unit,
     label: (T) -> String,
     anchor: @Composable ExposedDropdownMenuBoxScope.() -> Unit
@@ -70,13 +69,13 @@ fun <T> MultiDropDownSelector(
             onDismissRequest = { onExpandedChange(false) },
             shape = RoundedCornerShape(2.dp)
         ) {
-            values.map {
+            values.forEach { value ->
                 DropdownMenuItem(
                     text = {
-                        Text(label(it))
+                        Text(label(value))
                     },
                     onClick = {
-                        onAdd(it)
+                        onClickItem(value)
                         onExpandedChange(false)
                     }
                 )
@@ -98,7 +97,6 @@ fun <T> AutoCompleteDropDownSelector(
     placeholder: String? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
-
     ExposedDropdownMenuBox(
         modifier = modifier,
         expanded = expanded,
