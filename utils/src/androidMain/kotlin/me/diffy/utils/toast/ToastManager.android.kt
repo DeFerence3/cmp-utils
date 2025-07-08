@@ -8,9 +8,9 @@ private var activityProvider: () -> Activity? = {
     null
 }
 
+//see this usage
 fun setActivityProvider(provider: () -> Activity?) {
     activityProvider = provider
-
 }
 
 actual open class ToastManager actual constructor() {
