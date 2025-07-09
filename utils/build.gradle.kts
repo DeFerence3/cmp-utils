@@ -31,7 +31,7 @@ kotlin {
     }
 
     wasmJs {
-        moduleName = "composeApp"
+        outputModuleName = "composeApp"
     }
 
     // For iOS targets, this is also where you should
