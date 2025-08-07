@@ -31,3 +31,7 @@ val InputFieldElevation = 4.dp
 val InputFieldHorizontalPadding = 16.dp
 val InputFieldVerticalPadding = 12.dp
 val InputFieldFontSize = 16.sp
+
+val DarkSurface = Color(0xFF2D2D2D)
+val DarkText = Color(0xFFE0E0E0)
+val LightGrayBorder = Color(0xFF404040)
