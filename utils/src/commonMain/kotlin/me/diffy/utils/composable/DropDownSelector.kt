@@ -1,47 +1,30 @@
 package me.diffy.utils.composable
 
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import me.diffy.utils.InputFieldBackgroundColor
-import me.diffy.utils.InputFieldFontSize
-import me.diffy.utils.InputFieldPlaceholderColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T> DropDownSelector(
     modifier: Modifier = Modifier,
-    expanded: Boolean,
-    value: T?,
-    onValueChange: (T) -> Unit,
+    onSelect: (T) -> Unit,
     onExpandedChange: (Boolean) -> Unit,
+    expanded: Boolean,
     list: List<T>,
     label: (T) -> String,
-    placeholder: String? = null,
+    anchor: @Composable ExposedDropdownMenuBoxScope.() -> Unit
 ) {
     ExposedDropdownMenuBox(
         modifier = modifier,
         expanded = expanded,
-        onExpandedChange = onExpandedChange
+        onExpandedChange = {
+            onExpandedChange(it)
+        },
     ){
-        CustomTextField(
-            modifier = Modifier
-                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true),
-            value = if (value != null) label(value) else "",
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            },
-            onValueChange = { },
-            placeholder = placeholder,
-            readOnly = true,
-            focusRequester = null,
-        )
-
+        anchor(this)
         ExposedDropdownMenu(
             expanded = expanded,
             modifier = Modifier,
@@ -54,7 +37,7 @@ fun <T> DropDownSelector(
                         Text(label(it))
                     },
                     onClick = {
-                        onValueChange(it)
+                        onSelect(it)
                         onExpandedChange(false)
                     }
                 )
@@ -69,70 +52,30 @@ fun <T> MultiDropDownSelector(
     modifier: Modifier = Modifier,
     expanded: Boolean,
     values: List<T>,
-    onRemove: (T) -> Unit,
-    onAdd: (T) -> Unit,
+    onClickItem: (T) -> Unit,
     onExpandedChange: (Boolean) -> Unit,
-    selectedValues: List<T>,
     label: (T) -> String,
-    placeholder: String? = null,
+    anchor: @Composable ExposedDropdownMenuBoxScope.() -> Unit
 ) {
     ExposedDropdownMenuBox(
         modifier = modifier,
         expanded = expanded,
         onExpandedChange = onExpandedChange
     ){
-        Surface(
-            modifier = Modifier
-                .heightIn( min = OutlinedTextFieldDefaults.MinHeight)
-                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true),
-            color = InputFieldBackgroundColor,
-        ) {
-            Box(
-                modifier = Modifier,
-                contentAlignment = Alignment.CenterStart
-            ) {
-                if (selectedValues.isEmpty() && placeholder != null) {
-                    Text(
-                        text = placeholder,
-                        style = TextStyle(
-                            color = InputFieldPlaceholderColor,
-                            fontSize = InputFieldFontSize
-                        )
-                    )
-                }
-
-                FlowRow(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
-                ){
-                    selectedValues.forEach {
-                        AssistChip(
-                            modifier = Modifier,
-                            onClick = {
-                                onRemove(it)
-                                onExpandedChange(false)
-                            },
-                            label = { Text(label(it))},
-                        )
-                    }
-                }
-            }
-        }
-
+        anchor(this)
         ExposedDropdownMenu(
             expanded = expanded,
             modifier = Modifier,
             onDismissRequest = { onExpandedChange(false) },
             shape = RoundedCornerShape(2.dp)
         ) {
-            values.map {
+            values.forEach { value ->
                 DropdownMenuItem(
                     text = {
-                        Text(label(it))
+                        Text(label(value))
                     },
                     onClick = {
-                        onAdd(it)
+                        onClickItem(value)
                         onExpandedChange(false)
                     }
                 )
@@ -154,7 +97,6 @@ fun <T> AutoCompleteDropDownSelector(
     placeholder: String? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
-
     ExposedDropdownMenuBox(
         modifier = modifier,
         expanded = expanded,
