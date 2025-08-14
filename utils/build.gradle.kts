@@ -18,7 +18,7 @@ kotlin {
     androidLibrary {
         namespace = "me.diffy.utils"
         compileSdk = 35
-        minSdk = 23
+        minSdk = 22
 
         withHostTestBuilder {
         }
