@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="desktopRunHotAuto" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="hotRunDesktop" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value="composeApp:desktopRunHot" />
+          <option value=":composeApp:hotRunDesktop" />
           <option value="-auto" />
           <option value="--mainClass" />
           <option value="me.diffy.cmp.utils.MainKt" />

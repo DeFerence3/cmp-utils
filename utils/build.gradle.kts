@@ -17,7 +17,7 @@ kotlin {
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
         namespace = "me.diffy.utils"
-        compileSdk = 35
+        compileSdk = 36
         minSdk = 22
 
         withHostTestBuilder {
@@ -88,6 +88,7 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
                 implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
+                implementation(libs.kotlinx.datetime)
             }
         }
 
