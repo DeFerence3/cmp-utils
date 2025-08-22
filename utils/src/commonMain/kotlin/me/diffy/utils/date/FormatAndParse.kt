@@ -13,11 +13,11 @@ import kotlin.time.Instant
  * Format a Instant into a string. dd/MMM/yyyy
  */
 fun Instant.format(builder: DateTimeFormatBuilder.WithDateTime.() -> Unit = {
-    year()
-    chars("/")
-    monthName(MonthNames.ENGLISH_ABBREVIATED)
-    chars("/")
     day()
+    chars(" / ")
+    monthName(MonthNames.ENGLISH_ABBREVIATED)
+    chars(" / ")
+    year()
 }): String {
     val localDateTime = this.toLocalDateTime(TimeZone.currentSystemDefault())
     val formatter = LocalDateTime.Format(builder)
