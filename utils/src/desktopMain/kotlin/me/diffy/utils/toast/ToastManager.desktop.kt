@@ -11,7 +11,9 @@ private var composeWindowProvider: () -> ComposeWindow? = {
 fun setComposeWindowProvider(provider: () -> ComposeWindow) {
     composeWindowProvider = provider
 }
-
+/***
+ * <a href="https://proandroiddev.com/how-to-show-toasts-in-compose-multiplatform-android-ios-desktop-with-expect-actual-85c630d46d06">from here</a>
+ */
 actual open class ToastManager actual constructor() {
     actual fun showToast(message: String, toastDurationType: ToastDurationType) {
         val parent = composeWindowProvider.invoke()

@@ -35,7 +35,7 @@ actual inline fun Modifier.onKeyClick(key: Key, crossinline onClick: () -> Unit)
     this.then(modifier)
 }
 
-actual inline fun Modifier.onAnyKeyClick(crossinline onClick: (Key) -> Unit): Modifier = composed {
+actual inline fun Modifier.onAnyKeyClick(crossinline onClick: (key: Key) -> Unit): Modifier = composed {
     val pressedKeys = remember { mutableStateMapOf<Key, Boolean>() }
     val modifier = Modifier.onKeyEvent { keyEvent: KeyEvent ->
         when (keyEvent.type) {
