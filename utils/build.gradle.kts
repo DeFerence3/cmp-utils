@@ -30,10 +30,6 @@ kotlin {
         }
     }
 
-    wasmJs {
-        outputModuleName = "composeApp"
-    }
-
     // For iOS targets, this is also where you should
     // configure native binary output. For more information, see:
     // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
@@ -75,6 +71,7 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation(libs.ktor.client.okhttp)
         }
 
         commonMain {
@@ -89,6 +86,8 @@ kotlin {
                 implementation(libs.androidx.lifecycle.viewmodel)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
                 implementation(libs.kotlinx.datetime)
+
+                implementation(libs.bundles.ktor)
             }
         }
 
@@ -120,6 +119,7 @@ kotlin {
                 // part of KMP’s default source set hierarchy. Note that this source set depends
                 // on common by default and will correctly pull the iOS artifacts of any
                 // KMP dependencies declared in commonMain.
+                implementation(libs.ktor.client.darwin)
             }
         }
     }
