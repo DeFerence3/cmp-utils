@@ -17,16 +17,7 @@ publishing {
             from(components["kotlin"])
             groupId = "com.github.DeFerence3"
             artifactId = "cmp-utils"
-            version = "1.0.0"
-        }
-    }
-    repositories {
-        maven {
-            url = uri("https://maven.pkg.github.com/tuut/compose-utils")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
+            version = "1.0.1"
         }
     }
 }
