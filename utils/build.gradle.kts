@@ -8,7 +8,29 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    id("maven-publish")
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            from(components["kotlin"])
+            groupId = "com.github.DeFerence3"
+            artifactId = "cmp-utils"
+            version = "1.0.0"
+        }
+    }
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.github.com/tuut/compose-utils")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+
 
 kotlin {
 
