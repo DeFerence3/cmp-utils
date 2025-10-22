@@ -73,6 +73,10 @@ kotlin {
         }
     }
 
+    wasmJs{
+        browser()
+    }
+
     jvm("desktop")
 
     // Source set declarations.
