@@ -73,9 +73,9 @@ kotlin {
         }
     }
 
-    wasmJs{
+    /*wasmJs{
         browser()
-    }
+    }*/
 
     jvm("desktop")
 
