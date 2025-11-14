@@ -1,5 +1,7 @@
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
 
+[![](https://jitpack.io/v/DeFerence3/cmp-utils.svg)](https://jitpack.io/#DeFerence3/cmp-utils)
+
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
   - `commonMain` is for code that’s common for all targets.
