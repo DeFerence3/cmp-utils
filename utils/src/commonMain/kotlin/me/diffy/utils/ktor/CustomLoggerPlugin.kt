@@ -383,12 +383,12 @@ private fun computeRequestBodySize(content: Any): Long {
 private val HttpResponse.isSuccess get() = (this.status.value in 200..299)
 
 
-class MyLogginConf{
+public class MyLogginConf{
 
-    internal var logAll: Boolean = false
-    internal var logRequest: Boolean = false
-    internal var logResponse: Boolean = false
+    public var logAll: Boolean = false
+    public var logRequest: Boolean = false
+    public var logResponse: Boolean = false
 
-    internal var logOnError: Boolean = false
+    public var logOnError: Boolean = false
 
 }

@@ -25,6 +25,7 @@ fun App() {
         var selected by remember { mutableStateOf("") }
         FlowRow(
             modifier = Modifier
+                .statusBarsPadding()
                 .height(IntrinsicSize.Max)
                 .padding(2.dp),
             horizontalArrangement = Arrangement.spacedBy(2.dp)
